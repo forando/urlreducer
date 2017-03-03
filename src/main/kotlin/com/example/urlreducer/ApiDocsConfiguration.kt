@@ -33,23 +33,23 @@ open class ApiDocsConfiguration{
 
      * @return A Contact instance.
      */
-    private fun contact(): Contact {
+    /*private fun contact(): Contact {
         return Contact(PROJECT_CONTACT_NAME, PROJECT_CONTACT_URL, null)
-    }
+    }*/
 
     /**
      * Create an ApiInfo class to be used by Springfox's Swagger API Documentation framework.
 
      * @return An ApiInfo instance.
      */
-    private fun apiInfo(): ApiInfo {
+    /*private fun apiInfo(): ApiInfo {
 
         // @formatter:off
         val apiInfo = ApiInfoBuilder().title("Project Skeleton for Spring Boot Web Services").description("The Spring Boot web services starter project provides a foundation " + "to rapidly construct a RESTful web services application.").contact(contact()).version(PROJECT_VERSION).build()
         // @formatter:on
 
         return apiInfo
-    }
+    }*/
 
     /**
      * Create a Docket class to be used by Springfox's Swagger API Documentation framework. See
@@ -57,14 +57,14 @@ open class ApiDocsConfiguration{
 
      * @return A Docket instance.
      */
-    @Bean
+    /*@Bean
     fun docket(): Docket {
-        val paths = PathSelectors.ant("/**")
+        val paths = PathSelectors.ant("*//**")
 
         // @formatter:off
         val docket = Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select().paths(paths).build()
         // @formatter:on
 
         return docket
-    }
+    }*/
 }
