@@ -13,9 +13,19 @@ buildscript {
 	}
 }
 
+ext {
+	jacocoVersion = '0.7.7.201606060606'
+	checkstyleVersion = '7.2'
+	pmdVersion = '5.5.2'
+	guavaVersion = '20.0'
+	jadiraVersion = '5.0.0.GA'
+	swaggerVersion = '2.6.1'
+}
+
 apply plugin: 'kotlin'
 apply plugin: 'kotlin-spring'
 apply plugin: 'eclipse'
+apply plugin: 'jacoco'
 apply plugin: 'org.springframework.boot'
 
 jar {
@@ -35,6 +45,8 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile("org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}")
 	compile("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
+	compile ("io.springfox:springfox-swagger2:${swaggerVersion}")
+	compile ("io.springfox:springfox-swagger-ui:${swaggerVersion}")
 	compile ('com.fasterxml.jackson.module:jackson-module-kotlin:2.8.7')
 	compile ('com.jayway.jsonpath:json-path:2.2.0')
 //	compile ('com.fasterxml.jackson.datatype:jackson-datatype-joda')
@@ -45,3 +57,28 @@ dependencies {
 	runtime('com.h2database:h2')
 	runtime('org.postgresql:postgresql')
 }
+
+defaultTasks 'clean', 'build'
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '2.14.1'
+}
+
+springBoot {
+	executable = true
+	buildInfo()
+}
+
+jacoco {
+	toolVersion = jacocoVersion
+}
+
+jacocoTestReport {
+	reports {
+		html.enabled = true
+		xml.enabled = true
+		csv.enabled = false
+	}
+}
+
+test.finalizedBy jacocoTestReport
